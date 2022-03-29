@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <!-- menu stated -->
-    <title>Welcome to Bharat Bank</title>
+    <title>Bharat Bank Services</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -25,17 +25,120 @@
         </div>
     </div>
 
-    <div class="main-about-section">
-        <div class="Our-services">
-            <ul>
-                <li>Internet Banking</li>
-                <li>Mobile Banking</li>
-                <li>Personal Load</li>
-                <li>Home Loan</li>
-                <li>Insurance</li>
-            </ul>
-        </div>
-    </div>
 
 
     <!-- menu ended -->
+
+
+    <body>
+        <head>
+            <title>Bharat Bank Loan Calculation</title>
+            <style>
+                h1{
+                    text-align: center;
+                }
+                h4{
+                    color: brown;
+                    text-align: right;
+                }
+                div{
+                    text-align: center;
+                }
+            </style>
+            ><script>
+                
+                            var loanFlag=false;
+                            var fixedDepositFlag=false;
+                            function loan(){
+                                var loanstr = `
+                                                    <h2>Please Enter the details for loan</h2>
+                                                        <form name="f1" action="">
+                                                        <h3>
+                                                            Applicant : <input type="text" name="loanApplicant" required><br>
+                                                            Amount : <input type="number" name="loanAmount" required><br>
+                                                            Type : <select name="loanType" required onChange="calculateROIForLoan(loanType.value)">
+                                                                        <option value="Home">Home</option>
+                                                                        <option value="Car">Car</option>
+                                                                        <option value="Personal">Personal</option>
+                                                                    </select><br>
+                                                            ROI : <input type="text" name="loanROI" id="loanROI" disabled value='7%'><br>
+                                                            Duration (In Years) : <input type="number" name="loanDuration" id="loanDuration" min=0 max=25 required><br>
+                                                            EMI : <input type="number" name="loanEMI" disabled><br>
+                                                        <br>
+                                                        <input type="submit" value="Calculate">
+                                                        <input type="reset" value="RESET">
+                                                        </h3>		
+                                                        </form>
+                                                    `
+                                if(loanFlag)
+                                    {
+                                        document.getElementById("loanDiv").innerHTML = loanstr;
+                                        document.getElementById("loanHead").innerText = "HIDE Loan";
+                                        document.getElementById("loanHead").style.color = "RED";
+                                    }
+                                else
+                                    {
+                                        document.getElementById("loanDiv").innerText = "";
+                                        document.getElementById("loanHead").innerText = "Loan";
+                                        document.getElementById("loanHead").style.color = "BLUE";
+                                    }
+                                loanFlag = !loanFlag;
+                            }
+                            function calculateROIForLoan(loanType){
+                                        if(loanType == "Home"){
+                                                document.f1.loanROI.value = "7%";
+                                                document.f1.loanDuration.max = 25;
+                                        }
+                                        else if(loanType == "Car"){
+                                                document.f1.loanROI.value = "9%";
+                                                document.f1.loanDuration.max = 7;
+                                        }
+                                        else if(loanType == "Personal"){
+                                                document.f1.loanROI.value = "12%";
+                                                document.f1.loanDuration.max = 5;
+                                        }
+                            }
+                            function calculateEMIForLoan(loanAmount,loanROI,loanDuration){
+                                        console.log("Inside fn");
+                                        var emi= loanAmount*(1+loanROI*0.01)/(loanDuration*12)
+                                        console.log(emi);
+                            }
+                            function fixedDeposit(){
+                                
+                                var fdStr = `
+                                                    <h2>Please Enter the details for Fixed Deposit</h2>
+                                                        <form name="f2" action="">
+                                                        <h3>
+                                                            Principal Amount : <input type="number" name="principalAmount" required><br>
+                                                            Duration : <select name="fixedDepositDuration" required>
+                                                                        <option value="0-2">0-2</option>
+                                                                        <option value="2-5">2-5</option>
+                                                                        <option value="5-10">5-10</option>
+                                                                    </select><br>
+                                                            ROI : <input type="text" name="loanROI" disabled><br>
+                                                            EMI : <input type="number" name="loanEMI" disabled><br>
+                                                        <br>
+                                                        <input type="button" value="Calculate">
+                                                        <input type="reset" value="RESET">
+                                                        </h3>		
+                                                        </form>
+                                                    `
+                                if(fixedDepositFlag)
+                                    {
+                                        document.getElementById("fixedDepositDiv").innerHTML = fdStr;
+                                        document.getElementById("fixedDepositHead").innerText = "HIDE FixedDeposit";
+                                        document.getElementById("fixedDepositHead").style.color = "RED";
+                                    }
+                                else
+                                    {
+                                        document.getElementById("fixedDepositDiv").innerText = "";
+                                        document.getElementById("fixedDepositHead").innerText = "FixedDeposit";
+                                        document.getElementById("fixedDepositHead").style.color = "BLUE";
+                                    }
+                                fixedDepositFlag = !fixedDepositFlag;
+                            }
+                    
+                }
+            </script>
+        </head>
+    </body>
